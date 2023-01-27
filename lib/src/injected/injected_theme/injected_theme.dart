@@ -45,7 +45,7 @@ class InjectedTheme<Key> extends InjectedImp<Key> {
       //for the next frame.
       subscribeToRM(
         (_) {
-          WidgetsBinding.instance?.addPostFrameCallback(
+          WidgetsBinding.instance.addPostFrameCallback(
             (_) => onSetState._call(snapState),
           );
         },

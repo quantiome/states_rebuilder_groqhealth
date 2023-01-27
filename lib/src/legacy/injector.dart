@@ -203,8 +203,7 @@ class Injector extends StatefulWidget {
   }
 
   static Inject<T> _getInject<T>(String name, [bool silent = false]) {
-    final Inject<dynamic>? inject =
-        InjectorState.allRegisteredModelInApp[name]?.last;
+    final Inject<dynamic>? inject = InjectorState.allRegisteredModelInApp[name]?.last;
     assert(
       () {
         if (silent != true && inject == null) {
@@ -235,8 +234,7 @@ class Injector extends StatefulWidget {
 ///
 class InjectorState extends State<Injector> {
   ///Map contains all the registered models of the app
-  static final Map<String, List<Inject<dynamic>>> allRegisteredModelInApp =
-      <String, List<Inject<dynamic>>>{};
+  static final Map<String, List<Inject<dynamic>>> allRegisteredModelInApp = <String, List<Inject<dynamic>>>{};
 
   List<Inject<dynamic>> _injects = [];
   @override
@@ -262,7 +260,7 @@ class InjectorState extends State<Injector> {
     widget.initState?.call();
 
     if (widget.afterInitialBuild != null) {
-      WidgetsBinding.instance?.addPostFrameCallback(
+      WidgetsBinding.instance.addPostFrameCallback(
         (_) => widget.afterInitialBuild!(context),
       );
     }
@@ -286,17 +284,16 @@ class InjectorState extends State<Injector> {
 }
 
 ///State of injector mixin with WidgetsBindingObserver
-class InjectorStateAppLifeCycle extends InjectorState
-    with WidgetsBindingObserver {
+class InjectorStateAppLifeCycle extends InjectorState with WidgetsBindingObserver {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance?.addObserver(this);
+    WidgetsBinding.instance.addObserver(this);
   }
 
   @override
   void dispose() {
-    WidgetsBinding.instance?.removeObserver(this);
+    WidgetsBinding.instance.removeObserver(this);
     super.dispose();
   }
 
@@ -350,8 +347,7 @@ void unregisterInjects(List<Inject<dynamic>> _injects) {
     inject.injected.dispose();
 
     final name = inject.getName();
-    final isRemoved =
-        InjectorState.allRegisteredModelInApp[name]?.remove(inject);
+    final isRemoved = InjectorState.allRegisteredModelInApp[name]?.remove(inject);
     if (isRemoved != true) {
       continue;
     }

@@ -579,7 +579,7 @@ void main() {
   testWidgets('StateWithMixinBuilder appLifeCycle works',
       (WidgetTester tester) async {
     final BinaryMessenger defaultBinaryMessenger =
-        ServicesBinding.instance!.defaultBinaryMessenger;
+        ServicesBinding.instance.defaultBinaryMessenger;
     AppLifecycleState? lifecycleState;
     final widget = StateWithMixinBuilder(
       mixinWith: MixinWith.widgetsBindingObserver,

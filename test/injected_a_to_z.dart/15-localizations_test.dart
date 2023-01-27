@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:states_rebuilder/states_rebuilder.dart';
 
@@ -34,7 +33,7 @@ Locale? _localeFromTheApp;
 
 final currentLocale = RM.inject<Locale>(
   //return the stored locale or if null return the system locale
-  () => _storedLocale ?? WidgetsBinding.instance!.window.locales.first,
+  () => _storedLocale ?? WidgetsBinding.instance.window.locales.first,
   //Each time the currentLocale is changed, we refresh the i18n so it load the
   //right json file.
   // onData: (_) => i18n.refresh(),
@@ -47,8 +46,7 @@ final Injected<I18n> i18n = RM.injectFuture<I18n>(
     // - lang/ar.json
     // - lang/en.json
 
-    String jsonString = await rootBundle
-        .loadString('lang/${currentLocale.state.languageCode}.json');
+    String jsonString = await rootBundle.loadString('lang/${currentLocale.state.languageCode}.json');
     Map<String, dynamic> jsonMap = json.decode(jsonString);
 
     //returning an instance of I18n
@@ -139,8 +137,7 @@ void main() {
     _localeFromTheApp = null;
     _storedLocale = null;
   });
-  testWidgets('No stored locale, use the system locale (en_US)',
-      (tester) async {
+  testWidgets('No stored locale, use the system locale (en_US)', (tester) async {
     await tester.pumpWidget(LocalizationsApp());
     expect(find.text('Getting the json String ...'), findsOneWidget);
     await tester.pump(Duration(seconds: 1));
@@ -159,8 +156,7 @@ void main() {
     expect(find.text('هذه هي الجملة الثانية'), findsOneWidget);
   });
 
-  testWidgets('Manually change the locale form (en_US) ot (ar_DZ)',
-      (tester) async {
+  testWidgets('Manually change the locale form (en_US) ot (ar_DZ)', (tester) async {
     await tester.pumpWidget(LocalizationsApp());
     expect(find.text('Getting the json String ...'), findsOneWidget);
     await tester.pump(Duration(seconds: 1));
@@ -178,8 +174,7 @@ void main() {
     expect(find.text('هذه هي الجملة الثانية'), findsOneWidget);
   });
 
-  testWidgets('automatically change the locale form (en_US) ot (ar_DZ)',
-      (tester) async {
+  testWidgets('automatically change the locale form (en_US) ot (ar_DZ)', (tester) async {
     //To simulate that the system locale is changed, we set :
 
     //Holds the system locale
@@ -192,9 +187,7 @@ void main() {
 
     //Fake the currentLocale model
     currentLocale.injectMock(
-      () =>
-          _storedLocale ??
-          (_systemLocale ?? WidgetsBinding.instance!.window.locales.first),
+      () => _storedLocale ?? (_systemLocale ?? WidgetsBinding.instance.window.locales.first),
     );
     await tester.pumpWidget(LocalizationsApp());
     expect(find.text('Getting the json String ...'), findsOneWidget);

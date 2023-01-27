@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:states_rebuilder/src/reactive_model.dart';
-import 'package:states_rebuilder/states_rebuilder.dart';
 
 var counter = RM.inject(
   () => 0,
@@ -171,8 +170,7 @@ void main() async {
     expect(store.store, {'counter': '11'});
   });
 
-  testWidgets('persist with async read and async fromJson using InjectFuture',
-      (tester) async {
+  testWidgets('persist with async read and async fromJson using InjectFuture', (tester) async {
     counter = RM.injectFuture(
       () => Future.value(0),
       persist: () => PersistState(
@@ -246,8 +244,7 @@ void main() async {
     expect(StatesRebuilerLogger.message.contains('Delete All Error'), isTrue);
   });
 
-  testWidgets('Return to previous state and notify listeners when throw error',
-      (tester) async {
+  testWidgets('Return to previous state and notify listeners when throw error', (tester) async {
     counter = RM.inject(() => 0,
         persist: () => PersistState(
               key: 'counter',
@@ -312,8 +309,7 @@ void main() async {
     expect(counter.state, false);
     expect(store.store, {'counter': '0'});
   });
-  testWidgets('can not infer fromJson for non primitive, it throws',
-      (tester) async {
+  testWidgets('can not infer fromJson for non primitive, it throws', (tester) async {
     final counter = RM.inject<List<int>>(
       () => [0],
       persist: () => PersistState(key: 'counter'),
@@ -323,8 +319,7 @@ void main() async {
     expect(() => counter.state, throwsArgumentError);
   });
 
-  testWidgets('can not infer toJson for non primitive, it throws',
-      (tester) async {
+  testWidgets('can not infer toJson for non primitive, it throws', (tester) async {
     final counter = RM.inject<List<int>>(
       () => [0],
       persist: () => PersistState(
@@ -375,8 +370,7 @@ void main() async {
     //After three seconds as in the throttleDelay the state is persisted
     expect(store.store!['counter'], '3');
     expect(counter.state, 3);
-    expect(StatesRebuilerLogger.message,
-        '[states_rebuilder]: PersistState: write(counter, 3)');
+    expect(StatesRebuilerLogger.message, '[states_rebuilder]: PersistState: write(counter, 3)');
   });
 
   testWidgets('deleteAll the persistance', (tester) async {
@@ -394,8 +388,7 @@ void main() async {
     expect(store.store!['counter'], '1');
     counter.deleteAllPersistState();
     await tester.pump();
-    expect(StatesRebuilerLogger.message,
-        '[states_rebuilder]: PersistState: deleteAll');
+    expect(StatesRebuilerLogger.message, '[states_rebuilder]: PersistState: deleteAll');
   });
 
   testWidgets('read, delete , deleteAll with mock future time', (tester) async {

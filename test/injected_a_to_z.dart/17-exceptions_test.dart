@@ -1,6 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:states_rebuilder/src/reactive_model.dart';
-import 'package:states_rebuilder/states_rebuilder.dart';
 
 void main() {
   StatesRebuilerLogger.isTestMode = true;
@@ -42,22 +41,20 @@ void main() {
   // );
 }
 
-final x = RM.inject<int>(() => x.state);
-final arrayWithoutNullState =
-    RM.inject<List>(() => arrayWithoutNullState.state);
-final arrayWithNullState =
-    RM.inject<List>(() => arrayWithNullState.state, initialState: []);
+final ReactiveModel<int> x = RM.inject<int>(() => x.state);
+final ReactiveModel<List> arrayWithoutNullState = RM.inject<List>(() => arrayWithoutNullState.state);
+final ReactiveModel<List> arrayWithNullState = RM.inject<List>(() => arrayWithNullState.state, initialState: []);
 //
-final y1 = RM.inject<int>(() => y2.state);
-final y2 = RM.inject<int>(() => y1.state);
+final ReactiveModel<int> y1 = RM.inject<int>(() => y2.state);
+final ReactiveModel<int> y2 = RM.inject<int>(() => y1.state);
 
 //
-
-final z1 = RM.inject<int>(
-  () => z2.state,
-  dependsOn: DependsOn({z2}),
-);
-final z2 = RM.inject<int>(
-  () => z1.state,
-  dependsOn: DependsOn({z1}),
-);
+//
+// final ReactiveModel<int> z1 = RM.inject<int>(
+//   () => z2.state,
+//   dependsOn: DependsOn({z2}),
+// );
+// final ReactiveModel<int> z2 = RM.inject<int>(
+//   () => z1.state,
+//   dependsOn: DependsOn({z1}),
+// );

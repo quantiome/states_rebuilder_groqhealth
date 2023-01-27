@@ -1,7 +1,6 @@
 import 'dart:async';
 
-import 'package:states_rebuilder/src/reactive_model.dart';
-
+import '../reactive_model.dart';
 import 'injector.dart';
 
 abstract class Injectable {}

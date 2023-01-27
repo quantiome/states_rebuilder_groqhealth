@@ -2,7 +2,6 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-
 import 'package:states_rebuilder/src/reactive_model.dart';
 
 class Route1 extends StatefulWidget {
@@ -667,16 +666,14 @@ void main() {
         queryParams: {'data': 'Parsed data : 2'},
       );
       await tester.pumpAndSettle();
-      expect(find.text('Route1: toReplacementNamed, Parsed data : 2'),
-          findsOneWidget);
+      expect(find.text('Route1: toReplacementNamed, Parsed data : 2'), findsOneWidget);
 
       RM.navigate.toNamedAndRemoveUntil(
         'Route1/toNamedAndRemoveUntil, ',
         queryParams: {'data': 'Parsed data : 2'},
       );
       await tester.pumpAndSettle();
-      expect(find.text('Route1: toNamedAndRemoveUntil, Parsed data : 2'),
-          findsOneWidget);
+      expect(find.text('Route1: toNamedAndRemoveUntil, Parsed data : 2'), findsOneWidget);
     },
   );
 
@@ -851,8 +848,7 @@ void main() {
 
       expect(baseUrl, '/page5/id-2/page52/id-3');
       expect(routePath, '/page5/:page5ID/page52/:page52ID/:page521ID');
-      expect(pathParams,
-          {'page5ID': 'id-2', 'page52ID': 'id-3', 'page521ID': 'id-4'});
+      expect(pathParams, {'page5ID': 'id-2', 'page52ID': 'id-3', 'page521ID': 'id-4'});
       expect(queryParams, {'queryId': 'id-6'});
 
       RM.navigate.toNamed('/', arguments: '/');
@@ -886,7 +882,6 @@ void main() {
       final page1121 = (_) => Text('$_');
       final page1122 = (_) => Text('$_');
       final page12 = (_) => Text('$_');
-      final page2 = (_) => Text('$_');
       var getSubRoute = false;
 
       final routes = {

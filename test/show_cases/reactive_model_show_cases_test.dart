@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:states_rebuilder/src/reactive_model.dart';
@@ -67,13 +66,13 @@ void main() {
             onSetState: On.or(
               onWaiting: () {
                 ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                rm.state.count > 1
-                    ? ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text('Greater then 1 from SnackBar'),
-                        ),
-                      )
-                    : null;
+                if (rm.state.count > 1) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text('Greater then 1 from SnackBar'),
+                    ),
+                  );
+                }
               },
               onError: (err, _) {
                 ScaffoldMessenger.of(context).hideCurrentSnackBar();
@@ -170,8 +169,8 @@ class _Model {
   int count;
   _Model(this.count);
   void incrementFuture() => Future.delayed(Duration(seconds: 1), () => count++);
-  void incrementFutureWithError([String? error]) => Future.delayed(
-      Duration(seconds: 1), () => throw Exception(error ?? 'Error Message'));
+  void incrementFutureWithError([String? error]) =>
+      Future.delayed(Duration(seconds: 1), () => throw Exception(error ?? 'Error Message'));
   Stream<void> incrementStream() async* {
     await Future.delayed(Duration(seconds: 1), () => count++);
     yield null;

@@ -29,12 +29,12 @@ class ProdConfiguration implements IConfiguration {
 
 //
 
-enum env { DEV, PROD }
+enum Env { DEV, PROD }
 
 //USe injectInterface to register the two implementation
 final configuration = RM.injectFlavor({
-  env.DEV: () => DevConfiguration(),
-  env.PROD: () => ProdConfiguration(),
+  Env.DEV: () => DevConfiguration(),
+  Env.PROD: () => ProdConfiguration(),
 });
 
 class MyApp extends StatefulWidget {
@@ -68,7 +68,7 @@ void main() {
   //   RM.disposeAll();
   // });
   testWidgets('Development Configuration', (tester) async {
-    RM.env = env.DEV;
+    RM.env = Env.DEV;
     await tester.pumpWidget(MyApp());
 
     expect(find.text('Development configuration'), findsOneWidget);
@@ -76,7 +76,7 @@ void main() {
   });
 
   testWidgets('Production Configuration', (tester) async {
-    RM.env = env.PROD;
+    RM.env = Env.PROD;
     await tester.pumpWidget(MyApp());
 
     expect(find.text('Production configuration'), findsOneWidget);

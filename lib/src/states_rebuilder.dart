@@ -3,10 +3,8 @@ part of 'reactive_model.dart';
 abstract class StatesRebuilder<T> {
   bool _autoDisposeWhenNotUsed = true;
 
-  final _listenersOfStateFulWidget =
-      <void Function(ReactiveModel<T>? rm, List? tags, bool isOnCRUD)>[];
-  Disposer _listenToRMForStateFulWidget(
-      void Function(ReactiveModel<T>? rm, List? tags, bool isOnCRUD) fn) {
+  final _listenersOfStateFulWidget = <void Function(ReactiveModel<T>? rm, List? tags, bool isOnCRUD)>[];
+  Disposer _listenToRMForStateFulWidget(void Function(ReactiveModel<T>? rm, List? tags, bool isOnCRUD) fn) {
     _listenersOfStateFulWidget.add(fn);
     return () {
       _listenersOfStateFulWidget.remove(fn);
@@ -21,10 +19,8 @@ abstract class StatesRebuilder<T> {
   int get observerLength => _listenersOfStateFulWidget.length;
 
   void _notifyListeners([List? tags, bool isOnCRUD = false]) {
-    _listenersOfStateFulWidget.forEach((fn) => fn(
-        this is ReactiveModel<T> ? this as ReactiveModel<T> : null,
-        tags,
-        isOnCRUD));
+    _listenersOfStateFulWidget
+        .forEach((fn) => fn(this is ReactiveModel<T> ? this as ReactiveModel<T> : null, tags, isOnCRUD));
   }
 
   void rebuildStates([List? tags]) {
@@ -40,8 +36,7 @@ abstract class StatesRebuilder<T> {
     void Function(BuildContext context)? dispose,
     Object? Function()? watch,
     void Function(BuildContext context)? didChangeDependencies,
-    void Function(BuildContext context, _StateBuilder oldWidget)?
-        didUpdateWidget,
+    void Function(BuildContext context, _StateBuilder oldWidget)? didUpdateWidget,
     bool Function(SnapState<T>? previousState)? shouldRebuild,
     dynamic tag,
     Key? key,
@@ -51,7 +46,7 @@ abstract class StatesRebuilder<T> {
       initState: (context, setState, _) {
         initState?.call(context);
         if (onAfterInitialBuild != null) {
-          WidgetsBinding.instance?.addPostFrameCallback(
+          WidgetsBinding.instance.addPostFrameCallback(
             (_) => onAfterInitialBuild(context),
           );
         }
@@ -70,8 +65,7 @@ abstract class StatesRebuilder<T> {
               return;
             }
             if (tags != null) {
-              if (tag == null ||
-                  !tags.any((dynamic e) => _tags.contains('$e'))) {
+              if (tag == null || !tags.any((dynamic e) => _tags.contains('$e'))) {
                 return;
               }
             }
@@ -79,7 +73,7 @@ abstract class StatesRebuilder<T> {
             if (setState(rm)) {
               onSetState?.call(context);
               if (onAfterBuild != null) {
-                WidgetsBinding.instance?.addPostFrameCallback(
+                WidgetsBinding.instance.addPostFrameCallback(
                   (_) => onAfterBuild(context),
                 );
               }
@@ -92,8 +86,7 @@ abstract class StatesRebuilder<T> {
       },
       watch: watch,
       didChangeDependencies: (context) => didChangeDependencies?.call(context),
-      didUpdateWidget: (context, oldWidget) =>
-          didUpdateWidget?.call(context, oldWidget),
+      didUpdateWidget: (context, oldWidget) => didUpdateWidget?.call(context, oldWidget),
       builder: (context, _) {
         return child.call(context);
       },

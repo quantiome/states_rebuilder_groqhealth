@@ -158,7 +158,7 @@ abstract class ReactiveModel<T> extends ReactiveModelUndoRedoState<T> {
     required R Function() onIdle,
     required R Function() onWaiting,
     required R Function(T state) onData,
-    required R Function(dynamic? error) onError,
+    required R Function(dynamic error) onError,
     bool catchError = true,
   }) {
     if (_whenConnectionState != true) {
@@ -205,7 +205,7 @@ abstract class ReactiveModel<T> extends ReactiveModelUndoRedoState<T> {
   Future<T?> setState(
     dynamic Function(T s)? fn, {
     void Function(T data)? onData,
-    void Function(dynamic? error)? onError,
+    void Function(dynamic error)? onError,
     // bool catchError = false,
     On<void>? onSetState,
     void Function()? onRebuildState,

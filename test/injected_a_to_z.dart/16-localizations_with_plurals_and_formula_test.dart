@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names, camel_case_types
+
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:states_rebuilder/states_rebuilder.dart';
@@ -51,7 +53,7 @@ Locale? _localeFromTheApp;
 
 final currentLocale = RM.inject<Locale>(
   //return the stored locale or if null return the system locale
-  () => _storedLocale ?? WidgetsBinding.instance!.window.locales.first,
+  () => _storedLocale ?? WidgetsBinding.instance.window.locales.first,
   //Each time the currentLocale is changed, we refresh the i18n so it load the
   //right json file.
   // onData: (_) => i18n.refresh(),

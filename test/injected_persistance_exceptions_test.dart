@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:states_rebuilder/src/reactive_model.dart';
-import 'package:states_rebuilder/states_rebuilder.dart';
 
 var counter = RM.inject<int>(
   () => 0,
@@ -73,10 +72,8 @@ void main() async {
     await tester.pump();
     expect(StatesRebuilerLogger.message.contains('Delete All Error'), isTrue);
   });
-  testWidgets('persistStateProvider, catchPersistError and onError',
-      (tester) async {
-    counter = RM.injectFuture<int>(
-        () => Future.delayed(Duration(seconds: 1), () => 10),
+  testWidgets('persistStateProvider, catchPersistError and onError', (tester) async {
+    counter = RM.injectFuture<int>(() => Future.delayed(Duration(seconds: 1), () => 10),
         persist: () => PersistState(
               key: 'Future_counter',
               persistStateProvider: PersistStoreMockImp(),

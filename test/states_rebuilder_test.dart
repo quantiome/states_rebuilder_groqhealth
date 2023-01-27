@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:states_rebuilder/src/reactive_model.dart';
@@ -374,5 +373,7 @@ class ContextX extends Element {
   bool get debugDoingBuild => throw UnimplementedError();
 
   @override
-  void performRebuild() {}
+  void performRebuild() {
+    super.performRebuild();
+  }
 }

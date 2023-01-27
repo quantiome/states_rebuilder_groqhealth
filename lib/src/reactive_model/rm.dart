@@ -477,11 +477,11 @@ you had $_envMapLength flavors and you are defining ${impl.length} flavors.
               inj._auth!._autoSignOut();
               // inj._auth!.autoSignOut(autoSignOut(inj._state!));
             }
-            WidgetsBinding.instance?.addPostFrameCallback(
+            WidgetsBinding.instance.addPostFrameCallback(
               (_) => onSigned?.call(inj._state!),
             );
           } else {
-            WidgetsBinding.instance?.addPostFrameCallback(
+            WidgetsBinding.instance.addPostFrameCallback(
               (_) => onUnsigned?.call(),
             );
           }
@@ -732,7 +732,7 @@ you had $_envMapLength flavors and you are defining ${impl.length} flavors.
       return;
     }
     _context = context;
-    WidgetsBinding.instance?.addPostFrameCallback(
+    WidgetsBinding.instance.addPostFrameCallback(
       (_) {
         return _context = null;
       },

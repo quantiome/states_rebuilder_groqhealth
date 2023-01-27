@@ -1,6 +1,7 @@
+// ignore_for_file: body_might_complete_normally_nullable
+
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-
 import 'package:states_rebuilder/src/reactive_model.dart';
 
 class Product {
@@ -85,11 +86,7 @@ class Repository implements ICRUD<Product, Object> {
 
   @override
   Future<void> init() async {
-    _products = [
-      Product(id: 1, name: 'prod1'),
-      Product(id: 2, name: 'prod2'),
-      Product(id: 3, name: 'prod3')
-    ];
+    _products = [Product(id: 1, name: 'prod1'), Product(id: 2, name: 'prod2'), Product(id: 3, name: 'prod3')];
   }
 }
 
@@ -163,8 +160,7 @@ class NewPage extends StatelessWidget {
     return On.data(
       () => ElevatedButton(
         key: Key('RaisedButton2: ${product.state.id}'),
-        child:
-            Text('${products.item.of(context)!.name}: ${product.state.count}'),
+        child: Text('${products.item.of(context)!.name}: ${product.state.count}'),
         onPressed: () {
           product.state = product.state.copyWith(
             count: product.state.count + 1,

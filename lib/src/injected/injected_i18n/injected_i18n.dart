@@ -33,8 +33,7 @@ class InjectedI18N<I18N> extends InjectedImp<I18N> {
     bool isLazy = true,
     String? debugPrintWhenNotifiedPreMessage,
     void Function(dynamic error, StackTrace stackTrace)? debugError,
-    SnapState<I18N>? Function(MiddleSnapState<I18N> middleSnap)?
-        middleSnapState,
+    SnapState<I18N>? Function(MiddleSnapState<I18N> middleSnap)? middleSnapState,
     //
   })  : _i18n = i18n,
         super(
@@ -59,7 +58,7 @@ class InjectedI18N<I18N> extends InjectedImp<I18N> {
       //for the next frame.
       subscribeToRM(
         (_) {
-          WidgetsBinding.instance?.addPostFrameCallback(
+          WidgetsBinding.instance.addPostFrameCallback(
             (_) => onSetState._callForSideEffects(snapState),
           );
         },
@@ -122,8 +121,7 @@ class InjectedI18N<I18N> extends InjectedImp<I18N> {
       }
     }
 
-    final l = _i18n.keys
-        .firstWhereOrNull((l) => locale.languageCode == l.languageCode);
+    final l = _i18n.keys.firstWhereOrNull((l) => locale.languageCode == l.languageCode);
     if (l != null) {
       return l;
     }
@@ -131,7 +129,7 @@ class InjectedI18N<I18N> extends InjectedImp<I18N> {
   }
 
   Locale _getSystemLocale() {
-    return WidgetsBinding.instance!.platformDispatcher.locale;
+    return WidgetsBinding.instance.platformDispatcher.locale;
   }
 
   ///Default locale resolution used by states_rebuilder.
@@ -143,10 +141,9 @@ class InjectedI18N<I18N> extends InjectedImp<I18N> {
   ///
   ///for more elaborate logic, use [MaterialApp.localeListResolutionCallback]
   ///and define your logic.
-  Locale Function(Locale? locale, Iterable<Locale> supportedLocales)
-      get localeResolutionCallback => (locale, __) {
-            return _resolvedLocale!;
-          };
+  Locale Function(Locale? locale, Iterable<Locale> supportedLocales) get localeResolutionCallback => (locale, __) {
+        return _resolvedLocale!;
+      };
 
   @override
   void _onDisposeState() {

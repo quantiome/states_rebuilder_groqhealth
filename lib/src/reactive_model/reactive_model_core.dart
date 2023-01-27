@@ -116,8 +116,7 @@ class ReactiveModelCore<T> {
         //the snap state is immutable and not changed.
         return;
       }
-      if (_watch != null &&
-          deepEquality.equals(_cachedWatch, _cachedWatch = _watch!(data))) {
+      if (_watch != null && deepEquality.equals(_cachedWatch, _cachedWatch = _watch!(data))) {
         return;
       }
       snapState = snap;
@@ -142,7 +141,7 @@ class ReactiveModelCore<T> {
 
     notifyListeners();
     if (onRebuildState != null) {
-      WidgetsBinding.instance?.addPostFrameCallback(
+      WidgetsBinding.instance.addPostFrameCallback(
         (_) => onRebuildState(),
       );
     }
@@ -156,7 +155,7 @@ class ReactiveModelCore<T> {
     StackTrace s, {
     required void Function() onErrorRefresher,
     On<void>? onSetState,
-    Function(dynamic? error)? onError,
+    Function(dynamic error)? onError,
     BuildContext? context,
   }) {
     final snap = snapState._copyToHasError(

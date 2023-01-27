@@ -2,6 +2,13 @@ part of '../reactive_model.dart';
 
 final _navigate = _Navigate();
 
+extension RouteSettingsExtension on RouteSettings {
+  RouteSettings copyWith({String? name, Object? arguments}) => RouteSettings(
+        name: name ?? name,
+        arguments: arguments ?? arguments,
+      );
+}
+
 class _Navigate {
   ///get the NavigatorState
   NavigatorState get navigatorState {
@@ -130,16 +137,13 @@ MaterialApp(
           queryParams: {..._routeQueryParams},
           pathParams: {..._routePathParams},
         );
-        routeData!._isBaseUrlChanged =
-            _baseUrl.isEmpty ? true : !_baseUrl.startsWith(routeData!.baseUrl);
+        routeData!._isBaseUrlChanged = _baseUrl.isEmpty ? true : !_baseUrl.startsWith(routeData!.baseUrl);
 
         Widget page = route(routeData!);
 
         if (page is RouteWidget) {
           if (page.routes.isEmpty) {
-            name = _routeData.containsKey(name)
-                ? '$name' + '${_routeData.length}'
-                : name;
+            name = _routeData.containsKey(name) ? '$name' + '${_routeData.length}' : name;
             _routeData[name] = _RouteData(
               builder: page.builder,
               subRoute: null,
@@ -149,9 +153,7 @@ MaterialApp(
             return page.builder!(Container());
           } else {
             if (page.builder != null) {
-              name = _routeData.containsKey(name)
-                  ? '$name' + '${_routeData.length}'
-                  : name;
+              name = _routeData.containsKey(name) ? '$name' + '${_routeData.length}' : name;
               _routeData[name] = _RouteData(
                 builder: page.builder,
                 subRoute: null,
@@ -173,9 +175,7 @@ MaterialApp(
             return null;
           }
         }
-        name = _routeData.containsKey(name)
-            ? '$name' + '${_routeData.length}'
-            : name;
+        name = _routeData.containsKey(name) ? '$name' + '${_routeData.length}' : name;
         _routeData[name] = _RouteData(
           builder: (_) => page,
           routeData: routeData!,
@@ -256,8 +256,7 @@ MaterialApp(
         return r;
       } else {
         return unknownRoute != null
-            ? _pageRouteBuilder(
-                (_) => unknownRoute(absolutePath), settings, false, true)
+            ? _pageRouteBuilder((_) => unknownRoute(absolutePath), settings, false, true)
             : null;
       }
     };
@@ -416,9 +415,7 @@ MaterialApp(
         fullscreenDialog,
         maintainState,
       ),
-      untilRouteName != null
-          ? ModalRoute.withName(untilRouteName)
-          : (r) => false,
+      untilRouteName != null ? ModalRoute.withName(untilRouteName) : (r) => false,
     );
   }
 
@@ -441,14 +438,11 @@ MaterialApp(
     _fullscreenDialog = fullscreenDialog;
     _maintainState = maintainState;
     if (queryParams != null) {
-      newRouteName =
-          Uri(path: newRouteName, queryParameters: queryParams).toString();
+      newRouteName = Uri(path: newRouteName, queryParameters: queryParams).toString();
     }
     return navigatorState.pushNamedAndRemoveUntil<T>(
       newRouteName,
-      untilRouteName != null
-          ? ModalRoute.withName(untilRouteName)
-          : (r) => false,
+      untilRouteName != null ? ModalRoute.withName(untilRouteName) : (r) => false,
       arguments: arguments,
     );
   }

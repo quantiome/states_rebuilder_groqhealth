@@ -225,7 +225,7 @@ class On<T> {
     return true;
   }
 
-  T? _callForSideEffects(SnapState snapState) {
+  void _callForSideEffects(SnapState snapState) {
     if (snapState.isWaiting && _hasOnWaiting) {
       _onWaiting!.call();
     } else if (snapState.hasError && _hasOnError) {
@@ -281,6 +281,8 @@ class On<T> {
     if (_hasOnError) {
       return _onError!.call(snapState.error, () {});
     }
+
+    return null;
   }
 }
 
@@ -341,7 +343,7 @@ extension OnX on On<Widget> {
         initState?.call();
         // state;
         if (onAfterBuild != null) {
-          WidgetsBinding.instance?.addPostFrameCallback(
+          WidgetsBinding.instance.addPostFrameCallback(
             (_) => onAfterBuild._call(injected._snapState),
           );
         }
@@ -360,7 +362,7 @@ extension OnX on On<Widget> {
             return;
           }
           if (onAfterBuild != null) {
-            WidgetsBinding.instance?.addPostFrameCallback(
+            WidgetsBinding.instance.addPostFrameCallback(
               (_) => onAfterBuild._call(rm._snapState),
             );
           }
@@ -627,7 +629,7 @@ class _OnAuth<T> {
           (rm, tags, _) {
             onSetState?._call(rm!.snapState);
             if (useRouteNavigation && injected.hasData) {
-              SchedulerBinding.instance?.scheduleFrameCallback(
+              SchedulerBinding.instance.scheduleFrameCallback(
                 (_) {
                   if (injected.isSigned) {
                     RM.navigate.toAndRemoveUntil<T>(

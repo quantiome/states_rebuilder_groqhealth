@@ -169,8 +169,7 @@ void main() {
     void Function()? refresh;
     final widget = TopAppWidget(
       waiteFor: () => [
-        Future.delayed(Duration(seconds: 1),
-            () => shouldThrow ? throw Exception('Error') : 1),
+        Future.delayed(Duration(seconds: 1), () => shouldThrow ? throw Exception('Error') : 1),
         Future.delayed(Duration(seconds: 2), () => 2),
       ],
       onWaiting: () => Directionality(
@@ -204,8 +203,7 @@ void main() {
     expect(find.text('Data'), findsOneWidget);
   });
   testWidgets('appLifeCycle works', (WidgetTester tester) async {
-    final BinaryMessenger defaultBinaryMessenger =
-        ServicesBinding.instance!.defaultBinaryMessenger;
+    final BinaryMessenger defaultBinaryMessenger = ServicesBinding.instance.defaultBinaryMessenger;
     AppLifecycleState? lifecycleState;
     final widget = TopAppWidget(
       didChangeAppLifecycleState: (state) {
@@ -218,26 +216,21 @@ void main() {
 
     expect(lifecycleState, isNull);
 
-    ByteData? message =
-        const StringCodec().encodeMessage('AppLifecycleState.paused');
-    await defaultBinaryMessenger.handlePlatformMessage(
-        'flutter/lifecycle', message, (_) {});
+    ByteData? message = const StringCodec().encodeMessage('AppLifecycleState.paused');
+    await defaultBinaryMessenger.handlePlatformMessage('flutter/lifecycle', message, (_) {});
     await tester.pump();
     expect(lifecycleState, AppLifecycleState.paused);
 
     message = const StringCodec().encodeMessage('AppLifecycleState.resumed');
-    await defaultBinaryMessenger.handlePlatformMessage(
-        'flutter/lifecycle', message, (_) {});
+    await defaultBinaryMessenger.handlePlatformMessage('flutter/lifecycle', message, (_) {});
     expect(lifecycleState, AppLifecycleState.resumed);
 
     message = const StringCodec().encodeMessage('AppLifecycleState.inactive');
-    await defaultBinaryMessenger.handlePlatformMessage(
-        'flutter/lifecycle', message, (_) {});
+    await defaultBinaryMessenger.handlePlatformMessage('flutter/lifecycle', message, (_) {});
     expect(lifecycleState, AppLifecycleState.inactive);
 
     message = const StringCodec().encodeMessage('AppLifecycleState.detached');
-    await defaultBinaryMessenger.handlePlatformMessage(
-        'flutter/lifecycle', message, (_) {});
+    await defaultBinaryMessenger.handlePlatformMessage('flutter/lifecycle', message, (_) {});
     expect(lifecycleState, AppLifecycleState.detached);
   });
 }

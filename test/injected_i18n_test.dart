@@ -1,5 +1,7 @@
-import 'package:flutter_localizations/flutter_localizations.dart';
+// ignore_for_file: body_might_complete_normally_nullable
+
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:states_rebuilder/src/reactive_model.dart';
 
@@ -20,8 +22,7 @@ final i18nStored = RM.injectI18N(
 );
 
 void main() {
-  testWidgets('system language is not in the supported local, get the first',
-      (tester) async {
+  testWidgets('system language is not in the supported local, get the first', (tester) async {
     TextDirection? textDirection;
     final i18n = RM.injectI18N({
       Locale('ar'): () => 'arabic',
@@ -57,9 +58,7 @@ void main() {
     expect(textDirection, TextDirection.ltr);
   });
 
-  testWidgets(
-      'system language is not in the supported local, get the same language code',
-      (tester) async {
+  testWidgets('system language is not in the supported local, get the same language code', (tester) async {
     TextDirection? textDirection;
     final i18n = RM.injectI18N({
       Locale('ar'): () => 'arabic',
@@ -95,8 +94,7 @@ void main() {
     expect(textDirection, TextDirection.rtl);
   });
 
-  testWidgets('system language is in the supported local, get it',
-      (tester) async {
+  testWidgets('system language is in the supported local, get it', (tester) async {
     final i18n = RM.injectI18N({
       Locale('ar'): () => 'arabic',
       Locale('en', 'TN'): () => 'english_TN',
@@ -187,14 +185,10 @@ void main() {
   testWidgets('async translation', (tester) async {
     final i18n = RM.injectI18N(
       {
-        Locale('ar'): () =>
-            Future.delayed(Duration(seconds: 1), () => 'arabic'),
-        Locale('en', 'TN'): () =>
-            Future.delayed(Duration(seconds: 1), () => 'english_TN'),
-        Locale('en', 'US'): () =>
-            Future.delayed(Duration(seconds: 1), () => 'english_US'),
-        Locale('es', 'ES'): () =>
-            Future.delayed(Duration(seconds: 1), () => 'spanish'),
+        Locale('ar'): () => Future.delayed(Duration(seconds: 1), () => 'arabic'),
+        Locale('en', 'TN'): () => Future.delayed(Duration(seconds: 1), () => 'english_TN'),
+        Locale('en', 'US'): () => Future.delayed(Duration(seconds: 1), () => 'english_US'),
+        Locale('es', 'ES'): () => Future.delayed(Duration(seconds: 1), () => 'spanish'),
       },
     );
     TextDirection? textDirection;
@@ -355,8 +349,7 @@ void main() {
     //
   });
 
-  testWidgets('persist language. non suported locale is stored',
-      (tester) async {
+  testWidgets('persist language. non suported locale is stored', (tester) async {
     TextDirection? textDirection;
     Locale? localization;
     late Map<String, String> store;
@@ -411,10 +404,7 @@ void main() {
         Locale('ar'): () => 'arabic',
         Locale('en', 'TN'): () => 'english_TN',
         Locale('en', 'US'): () => 'english_US',
-        Locale.fromSubtags(
-            languageCode: 'es',
-            scriptCode: 'script',
-            countryCode: 'ES'): () => 'spanish',
+        Locale.fromSubtags(languageCode: 'es', scriptCode: 'script', countryCode: 'ES'): () => 'spanish',
       },
       persistKey: '_lan_',
     );
@@ -476,10 +466,7 @@ void main() {
         Locale('ar'): () => 'arabic',
         Locale('en', 'TN'): () => 'english_TN',
         Locale('en', 'US'): () => 'english_US',
-        Locale.fromSubtags(
-            languageCode: 'es',
-            scriptCode: 'script',
-            countryCode: 'ES'): () => 'spanish',
+        Locale.fromSubtags(languageCode: 'es', scriptCode: 'script', countryCode: 'ES'): () => 'spanish',
       },
       persistKey: '_lan_',
     );
@@ -547,8 +534,7 @@ void main() {
         middleSnapState: (middleSnap) {
           _snapState = middleSnap.currentSnap;
           _nextSnapState = middleSnap.nextSnap;
-          if (middleSnap.nextSnap.hasError &&
-              middleSnap.nextSnap.error.message == 'Error') {
+          if (middleSnap.nextSnap.hasError && middleSnap.nextSnap.error.message == 'Error') {
             return middleSnap.currentSnap.copyToHasData('arabic');
           }
         },

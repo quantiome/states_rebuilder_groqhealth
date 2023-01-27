@@ -1,7 +1,6 @@
 //Fetching a list of counters from a backend service
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-
 import 'package:states_rebuilder/states_rebuilder.dart';
 
 bool _shouldThrow = false;
@@ -12,9 +11,7 @@ class Counter {
   Counter({required this.id, required this.value});
   Future<Counter> increment() async => Future.delayed(
         Duration(seconds: 1),
-        () => _shouldThrow
-            ? throw Exception('$id error')
-            : copyWith(id, value + 1),
+        () => _shouldThrow ? throw Exception('$id error') : copyWith(id, value + 1),
       );
 
   Counter copyWith(String? id, int? value) {
@@ -103,12 +100,11 @@ class CounterItem extends StatelessWidget {
           onError: (e, _) => Text('${counter.state.id}: hasError'),
           or: () {
             //count the number of rebuild
-            numberOfRebuild[counter.state.id] =
-                numberOfRebuild[counter.state.id]! + 1;
+            numberOfRebuild[counter.state.id] = numberOfRebuild[counter.state.id]! + 1;
             return Text('${counter.state.id}: ${counter.state.value}');
           },
         ).listenTo(counter),
-        RaisedButton(
+        ElevatedButton(
           key: Key(counter.state.id),
           onPressed: () => counter.setState((s) => s.increment()),
           child: Text(counter.state.id),

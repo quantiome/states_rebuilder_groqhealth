@@ -139,7 +139,7 @@ abstract class ReactiveModelInitializer<T> extends ReactiveModelState<T> {
     required void Function() onErrorRefresher,
     On<void>? onSetState,
     void Function()? onRebuildState,
-    void Function(dynamic? error)? onError,
+    void Function(dynamic error)? onError,
     void Function(T data)? onData,
     //use to set _nullState if not defined when instantiating
     //a future or stream

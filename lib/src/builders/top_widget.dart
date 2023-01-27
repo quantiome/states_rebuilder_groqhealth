@@ -47,7 +47,7 @@ class TopAppWidget extends StatefulWidget {
     this.onError,
     this.injectedAuth,
     required this.builder,
-  })   : assert(
+  })  : assert(
           waiteFor == null || onWaiting != null,
           'You have to define a waiting splash screen '
           'using onWaiting parameter',
@@ -92,8 +92,7 @@ class _TopAppWidgetState extends State<TopAppWidget> {
           builder: (context) {
             if (_isWaiting || widget.injectedI18N!.isWaiting) {
               if (widget.onWaiting == null) {
-                throw Exception(
-                    'TopWidget is waiting for dependencies to initialize. '
+                throw Exception('TopWidget is waiting for dependencies to initialize. '
                     'you have to define a waiting screen using the onWaiting '
                     'parameter of the TopWidget');
               } else {
@@ -106,9 +105,7 @@ class _TopAppWidgetState extends State<TopAppWidget> {
       };
     }
     if (!_hasWaiteFor) {
-      child = _builderI18N?.call(widget.builder) ??
-          _builderTheme?.call(widget.builder) ??
-          widget.builder(context);
+      child = _builderI18N?.call(widget.builder) ?? _builderTheme?.call(widget.builder) ?? widget.builder(context);
     }
   }
 
@@ -135,9 +132,7 @@ class _TopAppWidgetState extends State<TopAppWidget> {
         error = e;
       });
     } finally {
-      child = _builderI18N?.call(widget.builder) ??
-          _builderTheme?.call(widget.builder) ??
-          widget.builder(context);
+      child = _builderI18N?.call(widget.builder) ?? _builderTheme?.call(widget.builder) ?? widget.builder(context);
     }
   }
 
@@ -167,17 +162,16 @@ class _TopAppWidgetState extends State<TopAppWidget> {
   }
 }
 
-class _TopWidgetWidgetsBindingObserverState extends _TopAppWidgetState
-    with WidgetsBindingObserver {
+class _TopWidgetWidgetsBindingObserverState extends _TopAppWidgetState with WidgetsBindingObserver {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance!.addObserver(this);
+    WidgetsBinding.instance.addObserver(this);
   }
 
   @override
   void dispose() {
-    WidgetsBinding.instance!.removeObserver(this);
+    WidgetsBinding.instance.removeObserver(this);
     super.dispose();
   }
 

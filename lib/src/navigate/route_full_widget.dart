@@ -4,15 +4,11 @@ class _RouteFullWidget extends StatefulWidget {
   final Widget child;
   final Map<String, _RouteData> routeData;
   final Animation<double>? animation;
-  final void Function()? initState;
-  final void Function()? dispose;
   const _RouteFullWidget({
     Key? key,
     required this.child,
     required this.routeData,
     this.animation,
-    this.initState,
-    this.dispose,
   }) : super(key: key);
 
   @override
@@ -26,13 +22,6 @@ class __RouteFullWidgetState extends State<_RouteFullWidget> {
   late String _cachedBaseUrl;
   bool _isDeactivated = true;
   bool _isInit = false;
-
-  @override
-  void initState() {
-    super.initState();
-
-    widget.initState?.call();
-  }
 
   @override
   void didChangeDependencies() {
@@ -171,7 +160,6 @@ class __RouteFullWidgetState extends State<_RouteFullWidget> {
   Widget build(BuildContext context) {
     if (_isDeactivated) {
       _isDeactivated = false;
-      widget.initState?.call();
 
       if (_lastSubRoute.isNotEmpty) {
         _lastSubRoutes.add(_lastSubRoute);

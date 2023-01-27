@@ -399,7 +399,7 @@ class StateWithMixinBuilder<T, R> extends StatefulWidget {
   static StateWithMixinBuilder<WidgetsBindingObserver, R>
       widgetsBindingObserver<R>({
     Key? key,
-    dynamic? tag,
+    dynamic tag,
     StatesRebuilder<R> Function()? observe,
     Widget Function(BuildContext context, ReactiveModel<R>? rm)? builder,
     Widget Function(BuildContext context, ReactiveModel<R>? rm, Widget? child)?
@@ -571,12 +571,12 @@ class _StateWithWidgetsBindingObserver<T, R> extends _State<T, R>
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance!.addObserver(this);
+    WidgetsBinding.instance.addObserver(this);
   }
 
   @override
   void dispose() {
-    WidgetsBinding.instance!.removeObserver(this);
+    WidgetsBinding.instance.removeObserver(this);
     super.dispose();
   }
 
