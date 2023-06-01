@@ -1,6 +1,6 @@
 part of 'reactive_model.dart';
 
-abstract class StatesRebuilder<T> {
+abstract mixin class StatesRebuilder<T> {
   bool _autoDisposeWhenNotUsed = true;
 
   final _listenersOfStateFulWidget = <void Function(ReactiveModel<T>? rm, List? tags, bool isOnCRUD)>[];

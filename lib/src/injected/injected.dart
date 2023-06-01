@@ -80,7 +80,7 @@ part of '../reactive_model.dart';
 ///or [Injected.injectStreamMock].
 ///
 ///
-abstract class Injected<T> implements ReactiveModel<T> {
+abstract mixin class Injected<T> implements ReactiveModel<T> {
   DependsOn<T>? _dependsOn;
   bool _dependenciesAreSet = false;
   Timer? _dependentDebounceTimer;

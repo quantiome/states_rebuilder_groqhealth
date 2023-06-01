@@ -597,7 +597,7 @@ MaterialApp(
   Future<T?> toCupertinoModalPopup<T>(
     Widget cupertinoModalPopup, {
     ImageFilter? filter,
-    bool? semanticsDismissible,
+    required bool semanticsDismissible,
   }) {
     return showCupertinoModalPopup<T>(
       context: navigatorState.context,

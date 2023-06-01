@@ -471,7 +471,7 @@ class _OnFuture<F> {
           // injected!._onFutureWaiter++;
           bool _isAlreadyNotified = false;
           return InjectedImp<T>(
-            creator: (_) => injected!.stateAsync,
+            creator: (_) => injected.stateAsync,
             //depends is add only to prevent injected from disposing while
             //this new Inject is alive
             dependsOn: DependsOn<T>(

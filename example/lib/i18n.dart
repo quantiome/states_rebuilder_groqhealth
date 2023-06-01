@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/widgets.dart';
-import 'package:states_rebuilder/states_rebuilder.dart';
+import 'package:states_rebuilder_groqhealth/states_rebuilder.dart';
 
 final i18n = RM.injectI18N({
   Locale('en'): () => EN(),

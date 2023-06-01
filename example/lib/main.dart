@@ -1,6 +1,6 @@
 import 'package:example/i18n.dart';
 import 'package:flutter/material.dart';
-import 'package:states_rebuilder/states_rebuilder.dart';
+import 'package:states_rebuilder_groqhealth/states_rebuilder.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'name_repository.dart';
 
@@ -111,19 +111,19 @@ class MyApp extends StatelessWidget {
 
 class HomeWidget extends StatelessWidget {
   const HomeWidget({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(i18n.of(context).helloWorldExample),
+        title: Text(i18n.of(context)?.helloWorldExample ?? ''),
         actions: [
           On(
             () => DropdownButton<Locale>(
               value: i18n.locale,
-              onChanged: (Locale locale) {
+              onChanged: (Locale? locale) {
                 i18n.locale = locale;
               },
               items: i18n.supportedLocales
@@ -158,13 +158,13 @@ class HomeWidget extends StatelessWidget {
 
 class RaisedButtonWidget extends StatelessWidget {
   const RaisedButtonWidget({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      child: Text(i18n.of(context).startStreaming),
+      child: Text(i18n.of(context)?.startStreaming ?? ''),
       onPressed: () {
         // Calling refresh on any injected will re-execute its creation
         // Function and notify its listeners
@@ -176,7 +176,7 @@ class RaisedButtonWidget extends StatelessWidget {
 
 class HelloNameWidget extends StatelessWidget {
   const HelloNameWidget({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override
@@ -196,7 +196,7 @@ class HelloNameWidget extends StatelessWidget {
             // This part will be re-rendered each time the helloName
             // emits notification of any kind of status (idle, waiting,
             // error, data).
-            onIdle: () => Text(i18n.of(context).enterYourName),
+            onIdle: () => Text(i18n.of(context)?.enterYourName ?? ''),
             onWaiting: () => CircularProgressIndicator(),
             onError: (err, refresh) => Text('${err.message}'),
             onData: () => Text(helloName.state),
@@ -217,7 +217,7 @@ class HelloNameWidget extends StatelessWidget {
 
 class TextFieldWidget extends StatelessWidget {
   const TextFieldWidget({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override
@@ -242,7 +242,7 @@ class TextFieldWidget extends StatelessWidget {
 
 class StreamNameWidget extends StatelessWidget {
   const StreamNameWidget({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override
